@@ -30,10 +30,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "XrWebUI", "XrWebUI\", "{856
 		SlnRelativePath = "XrWebUI\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMusicStore", "MvcMusicStore\MvcMusicStore.csproj", "{A6804557-B911-492A-A6F2-2B57B1101C98}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NdcPackage", "NdcPackage\NdcPackage.csproj", "{5C652778-010F-46DF-A13B-1F0C726799F7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,14 +52,6 @@ Global
 		{856DC7A0-9239-4528-A977-B44A5F19F149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856DC7A0-9239-4528-A977-B44A5F19F149}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{856DC7A0-9239-4528-A977-B44A5F19F149}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{A6804557-B911-492A-A6F2-2B57B1101C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6804557-B911-492A-A6F2-2B57B1101C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6804557-B911-492A-A6F2-2B57B1101C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6804557-B911-492A-A6F2-2B57B1101C98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C652778-010F-46DF-A13B-1F0C726799F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C652778-010F-46DF-A13B-1F0C726799F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C652778-010F-46DF-A13B-1F0C726799F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C652778-010F-46DF-A13B-1F0C726799F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
