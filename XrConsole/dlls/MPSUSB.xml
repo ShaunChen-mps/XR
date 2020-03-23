@@ -1,0 +1,440 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MPSUSB</name>
+    </assembly>
+    <members>
+        <member name="P:MPSDIGITAL.USB.HR1200PMBus.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.BlockReadFromFlash(System.Int32,System.Byte[]@)">
+            <summary>
+            从Flash内存读数据
+            </summary>
+            <param name="sleeptimeMS">延时时间</param>
+            <param name="ReadBuf">返回读取数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.BlockWriteToFlash(System.Byte[])">
+            <summary>
+            数据写入Flash内存
+            </summary>
+            <param name="bdata">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.ReadMCUAndKitVersion(System.String@,System.String@)">
+            <summary>
+            读取MCU和Kit信息
+            </summary>
+            <param name="strmcuinfo"></param>
+            <param name="strkitversion"></param>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.FlashToEEPROM(System.Byte,System.Byte,System.Byte@,System.Boolean@)">
+            <summary>
+            执行烧录
+            </summary>
+            <param name="handshake">握手信号 0xE1</param>
+            <param name="channel">通道信息</param>
+            <param name="errorchannel">返回错误通道信息</param>
+            <param name="result">返回烧录结果</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.SetExtTrigger(System.Boolean)">
+            <summary>
+            设置外部触发开关
+            </summary>
+            <param name="IsEnable">true:开启外部触发</param>
+            <param name="IsEnable">false:禁用外部触发</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1200PMBus.ReadFormICEEPROM(System.Byte,System.Byte,System.Byte@,System.Byte[]@)">
+            <summary>
+            从芯片EEPROM读取数据
+            </summary>
+            <param name="handshake"></param>
+            <param name="channel"></param>
+            <param name="error"></param>
+            <param name="outdata"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.HR1210UART.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1210UART.WriteWord(System.Byte,System.UInt16)">
+            <summary>
+            写命令 2字节
+            </summary>
+            <param name="register_code">寄存器</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1210UART.SendCmd(System.Byte)">
+            <summary>
+            发送cmd 0字节数据
+            </summary>
+            <param name="register_code">寄存器</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1210UART.ReadWord(System.Byte,System.UInt16@)">
+            <summary>
+            读命令 2字节
+            </summary>
+            <param name="register_code">寄存器</param>
+            <param name="outdata">返回读取的数据</param>
+            <returns>通讯正常且数据包正常：true；其他异常false</returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1210UART.VCC_ON">
+            <summary>
+            VCC_ON
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.HR1210UART.VCC_OFF">
+            <summary>
+            VCC_OFF
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.MPQ6533SPI.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ6533SPI.SPIWriteRead16Bits(System.UInt32,System.Byte,System.UInt16)">
+            <summary>
+            写16bits数据同时上报16bit数据+Pre data
+            </summary>
+            <param name="Pmbus_addr_int"></param>
+            <param name="register_code"></param>
+            <param name="data"></param>
+            <returns> WR1Data:Data(16bits)+PreRead(1bit) </returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ6533SPI.SetSPIFrequency(System.UInt16)">
+            <summary>
+            设置spi 频率
+            </summary>
+            <param name="senddata"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.MPQ7290SPI.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ7290SPI.SPIWriteReadNBytes(System.Byte[],System.Byte[]@)">
+            <summary>
+            SPI 读写N Bytes数据
+            </summary>
+            <param name="senddata">发送的数据 byte数组</param>
+            <param name="outdata">接收的数据 byte数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ7290SPI.SetSPIFrequency(System.UInt16)">
+            <summary>
+            设置spi 频率
+            </summary>
+            <param name="senddata"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.MPQ7901SPI.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ7901SPI.SPIWriteReadNBytes(System.Byte[],System.Byte[]@)">
+            <summary>
+            SPI 读写N Bytes数据
+            </summary>
+            <param name="senddata">发送的数据 byte数组</param>
+            <param name="outdata">接收的数据 byte数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ7901SPI.SPIWriteRead16Bits(System.UInt32,System.Byte,System.UInt16)">
+            <summary>
+            写16bits数据同时上报16bit数据+Pre data
+            </summary>
+            <param name="Pmbus_addr_int"></param>
+            <param name="register_code"></param>
+            <param name="data"></param>
+            <returns> WR1Data:Data(16bits)+PreRead(1bit) </returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MPQ7901SPI.SetSPIFrequency(System.UInt16,MPSDIGITAL.USB.EnumUPDOWNType)">
+            <summary>
+            设置spi 频率
+            </summary>
+            <param name="senddata"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.UART.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.UART.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.UART.CloseDevice">
+            <summary>
+            关闭设备
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.UART.CheckUSBStatus">
+            <summary>
+            检测 USB PMBus是否连接上 
+            Check either Silicon Lab or Cypress MCU is connected
+            </summary>
+            <returns>True:connect;False:disconnect</returns>
+        </member>
+        <member name="T:MPSDIGITAL.USB.USBState">
+            <summary>
+            USB状态类
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Cypress.BolckWriteCommand(System.UInt32,System.UInt32,System.UInt32,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            2016-11-29
+            BolckWriteCommand 
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.ReadMCUAndKitVersion(System.String@,System.String@)">
+            <summary>
+            read only HR1200
+            </summary>
+            <param name="pmbus_addr_int"></param>
+            <param name="register_code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.SetSPIFrequency(System.UInt16,MPSDIGITAL.USB.EnumUPDOWNType)">
+             <summary>
+            加上 上升下降沿 有效的config
+             </summary>
+             <param name="data"></param>
+             <param name="_UPDOWNType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.WriteWord_HR1210(System.Byte,System.Int32)">
+            <summary>
+            写一个字 ：MCU处理-UART
+            </summary>
+            <param name="register_code">寄存器</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.SendCmd_HR1210(System.Int32)">
+            <summary>
+            发送命令 0字节数据
+            </summary>
+            <param name="register_code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.ReadWord_HR1210(System.Int32,System.UInt16@)">
+            <summary>
+            读命令 2个字节
+            </summary>
+            <param name="register_code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.VCC_ON_HR1210">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.MCU.Siliconlab.VCC_OFF_HR1210">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MPSDIGITAL.USB.PMBus">
+            <summary>
+            PMBus类 定义I2C读写 继承USBState类，IDisposable接口 
+            </summary>
+        </member>
+        <member name="P:MPSDIGITAL.USB.PMBus.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.#ctor">
+            <summary>
+            PMBus构造函数，初始化isCypressMCUOpen,IsSiliconLabMCUClose,isSiliconLabMCUOpen=false
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.CloseDevice">
+            <summary>
+            关闭设备
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.CheckUSBStatus">
+            <summary>
+            检测 USB PMBus是否连接上 
+            Check either Silicon Lab or Cypress MCU is connected
+            </summary>
+            <returns>True:connect;False:disconnect</returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.SetI2CFrequency(System.Byte)">
+            <summary>
+            设置I2C的频率 , only support Silicon Labs.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.WriteCmd(System.UInt32,System.Byte)">
+            <summary>
+            写命令 0字节
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.WriteByte(System.UInt32,System.Byte,System.Byte)">
+            <summary>
+            写命令 1字节
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.WriteWord(System.UInt32,System.Byte,System.UInt16)">
+            <summary>
+            写命令 2字节
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.Write3Bytes(System.UInt32,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            写命令 3字节
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <param name="data1">数据1</param>
+            <param name="data2">数据2</param>
+            <param name="data3">数据3</param>
+            <param name="byte_num">字节数</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.Block_Write(System.UInt32,System.Byte,System.Byte,System.Byte[])">
+            <summary>
+            Block Write
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <param name="byte_num">字节数</param>
+            <param name="byte_data">数据</param>
+            <param name="pec_en">是否PEC</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.Block_Read(System.UInt32,System.Byte,System.Byte[]@)">
+            <summary>
+            Block Read
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <param name="data_read">bolck read data</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.ReadKitVersion">
+            <summary>
+            获取kit code rev_num
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.ReadACK(System.UInt32,System.Byte)">
+            <summary>
+            读取 返回ACK信号,Only SiliconLab
+            CY_ACK_NOTSUPPORTED=0xFF:Cypress暂时不支持
+            SI_ACK_SUCCESS=1：ACK True;
+            SI_ACK_FAILD=0:ACK Flase;
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.ReadByte(System.UInt32,System.Byte,System.Byte@)">
+            <summary> 
+            读命令 1字节 
+            </summary> 
+            <param name="pmbus_addr_int">设备地址</param> 
+            <param name="register_code">寄存器</param> 
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.ReadWord(System.UInt32,System.Byte,System.UInt16@)">
+            <summary>
+            读命令 2字节
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.Read3Byte(System.UInt32,System.Byte,System.UInt32@)">
+            <summary>
+            读命令 3字节 
+            </summary>
+            <param name="pmbus_addr_int">设备地址</param>
+            <param name="register_code">寄存器</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.CustomReadService(System.Byte[],System.Byte,System.Byte[]@)">
+            <summary>
+            自定义读 指令
+            </summary>
+            <param name="IOBuf">发送的数据包格式，数组</param>
+            <param name="ReadBufSize">返回的数据包数组大小</param>
+            <param name="OutData">返回的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPSDIGITAL.USB.PMBus.CustomWriteService(System.Byte[])">
+            <summary>
+            自定义写 指令
+            </summary>
+            <param name="IOBuf">发送的数据包格式，数组</param>
+            <returns></returns>
+        </member>
+        <member name="P:MPSDIGITAL.USB.SPI.Siliconlab">
+            <summary>
+            Siliconlab 实例(单例)
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.SPI.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.SPI.CloseDevice">
+            <summary>
+            关闭设备
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.USB.SPI.CheckUSBStatus">
+            <summary>
+            检测 USB PMBus是否连接上 
+            Check either Silicon Lab or Cypress MCU is connected
+            </summary>
+            <returns>True:connect;False:disconnect</returns>
+        </member>
+        <member name="T:MPSDIGITAL.MPSUSB">
+            <summary>
+            双重检测加锁  单例模式
+            </summary>
+        </member>
+        <member name="M:MPSDIGITAL.MPSUSB.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+    </members>
+</doc>

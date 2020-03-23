@@ -16,10 +16,11 @@ namespace XrCore.Pattern.IOC
         public Dictionary<ContainerKey, ContainerArgs> ContainerDic = new Dictionary<ContainerKey, ContainerArgs>();
         public IocManager()
         {
-            var types = CommonObj.Instance.Assemblies.SelectMany(p => p.GetTypes().Select(type => new { type, attr = type.GetCustomAttribute<ContainerAttribute>() }).Where(t => t.attr != null));
+            var types = CommonObj.Instance.Assemblies.SelectMany(p => p.GetTypes().Select(type => new { type, attrs = type.GetCustomAttributes<ContainerAttribute>() }).Where(t => t.attrs != null && t.attrs.Count() != 0));
             foreach (var type in types)
             {
-                AddContainer(type.type, type.attr);
+                foreach (var attr in type.attrs)
+                    AddContainer(type.type, attr);
             }
         }
         private void AddContainer(Type type, ContainerAttribute attrContainer, bool isNew = false)
@@ -39,6 +40,7 @@ namespace XrCore.Pattern.IOC
                         Logger.GetLogger("IocManager").Warn($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},已经注册到容器，无法再次注册");
                 }
                 var args = new ContainerArgs(type, attrContainer);
+                Logger.GetLogger("IocManager").Info($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},成功注册到容器");
                 ContainerDic.Add(key, args);
             }
         }

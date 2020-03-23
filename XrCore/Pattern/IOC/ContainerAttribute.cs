@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace XrCore.Pattern.IOC
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class ContainerAttribute : Attribute
     {
         public Type BaseType { get; private set; }

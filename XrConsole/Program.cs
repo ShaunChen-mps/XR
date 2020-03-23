@@ -23,6 +23,8 @@ using System.CodeDom;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
+using NPOI.XSSF.UserModel;
+using ExcelManager;
 
 namespace XrConsole
 {
@@ -45,25 +47,43 @@ namespace XrConsole
     }
     class Program
     {
+        static object value0 = "0";
         static void Main(string[] args)
         {
-            var a = new temp();
-            var b = (temp)a.CloneReflection();
-            Console.WriteLine(b.getta(fuckc.a | fuckc.c));
-            b.index = 2;
-            Console.Write(a.index);
-            var sw = new Stopwatch();
+            string input = "";
+            uint addrIn = 0x60;
+            MPSDIGITAL.MPSUSB.PMBus.CheckUSBStatus();
             while (true)
             {
-                sw.Reset();
-                sw.Start();
-                var testLog = new UnitLogger("testLog");//Logger.GetLogger("testLog");
-                
-                testLog.Info("fukc");
-                sw.Stop();
-                Console.WriteLine(sw.ElapsedMilliseconds);
-                //InvokeWebService("http://localhost:8057/User", "", "", null);
-                Thread.Sleep(1000);
+                try
+                {
+                    Console.WriteLine("请选择读写 1读 2写");
+                    input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        Console.WriteLine("请输入想要读取的地址,00-ff");
+                        input = Console.ReadLine();
+                        var addr = Convert.ToByte(input, 16);
+                        byte data = 0;
+                        var result = MPSDIGITAL.MPSUSB.PMBus.ReadByte(addrIn, addr, out data);
+                        Console.WriteLine($"您读取的地址[{addr}]的值为[{data}],状态为[{result}]");
+                    }
+                    else if (input == "2")
+                    {
+                        Console.WriteLine("请输入想要写入的地址,00-ff");
+                        input = Console.ReadLine();
+                        var addr = Convert.ToByte(input, 16);
+                        Console.WriteLine("请输入想要写入的值,00-ff");
+                        input = Console.ReadLine();
+                        var value = Convert.ToByte(input, 16);
+                        var result = MPSDIGITAL.MPSUSB.PMBus.WriteByte(addrIn, addr, value);
+                        Console.WriteLine($"您读取的地址[{addr}]的值为[{value}],状态为[{result}]");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
         }
         static object InvokeWebService(string url, string classname, string methodname, object[] args)

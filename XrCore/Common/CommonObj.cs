@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using XrCore.SingleBase.Pattern;
+using XrCore.Tools.Log;
 
 namespace XrCore.Common
 {
@@ -22,10 +23,17 @@ namespace XrCore.Common
                 if (assemblies == null)
                 {
                     assemblies = new List<Assembly>();
-                    var dlls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll");
+                    var dlls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "(*.dll|*.exe)");
                     foreach (var dll in dlls)
                     {
-                        assemblies.Add(Assembly.LoadFile(dll));
+                        try
+                        {
+                            assemblies.Add(Assembly.LoadFile(dll));
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.GetLogger("Assembly").Error($"加载程序及出错，程序集路径：{dll}\r\n堆栈信息:{ex}");
+                        }
                     }
                 }
                 return assemblies;
