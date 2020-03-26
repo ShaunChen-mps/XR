@@ -25,9 +25,10 @@ namespace XrCore.Pattern.IOC
         }
         private void AddContainer(Type type, ContainerAttribute attrContainer, bool isNew = false)
         {
+            var logger = new UnitLogger("IocManager");
             if (type.GetInterfaces().Where(p => p.FullName == attrContainer.BaseType.FullName).Count() == 0 && type.BaseType != attrContainer.BaseType)
             {
-                Logger.GetLogger("IocManager").Error($"类型{type.FullName}没有继承自{attrContainer.BaseType.FullName},无法注册到容器");
+                logger.Error($"类型{type.FullName}没有继承自{attrContainer.BaseType.FullName},无法注册到容器");
             }
             else
             {
@@ -37,10 +38,10 @@ namespace XrCore.Pattern.IOC
                     if (isNew)
                         ContainerDic.Remove(key);
                     else
-                        Logger.GetLogger("IocManager").Warn($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},已经注册到容器，无法再次注册");
+                        logger.Warn($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},已经注册到容器，无法再次注册");
                 }
                 var args = new ContainerArgs(type, attrContainer);
-                Logger.GetLogger("IocManager").Info($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},成功注册到容器");
+                logger.Info($"类型:{type.FullName},模块：{attrContainer.ModuleName},继承自{attrContainer.BaseType.FullName},成功注册到容器");
                 ContainerDic.Add(key, args);
             }
         }

@@ -12,17 +12,17 @@ namespace ExcelManager
 {
     public class RomRegExecelRow
     {
-        [Excel("ROM", "Register Page", 1)]
+        [Column("ROM", "Register Page", 1)]
         public ushort Page { get; private set; }
-        [Excel("ROM", "Register Address", 2)]
+        [Column("ROM", "Register Address", 2)]
         public string Address { get; private set; }
-        [Excel("ROM", "Register Name", 0)]
+        [Column("ROM", "Register Name", 0)]
         public string AddressName { get; private set; }
-        [Excel("ROM", "Register Bit Count", 3)]
+        [Column("ROM", "Register Bit Count", 3)]
         public int BitsCount { get; private set; }
-        [Excel("ROM", "Register Value", 4)]
+        [Column("ROM", "Register Value", 4)]
         public int Value { get; private set; }
-        [Excel("ROM", "Register Cfgs", 5)]
+        [Column("ROM", "Register Cfgs", 5)]
         public int[] Cfgs { get; set; }
         public RomRegExecelRow(ushort page, string address, int value, string addressName, int bitsCount, int cfgCount)
         {
@@ -36,7 +36,7 @@ namespace ExcelManager
     }
     public class ExcelProvider : IExcelProvider
     {
-        public void Export(List<Register> data, string fileName)
+        public void Export(IEnumerable<Register> data, string fileName)
         {
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
@@ -52,15 +52,15 @@ namespace ExcelManager
                 {
                     ramSheet.CreateRow(i);
                 }
+                
                 foreach (var prop in typeof(Register).GetProperties())
                 {
-                    var attrs = prop.GetCustomAttributes(typeof(ExcelAttribute), true) as IEnumerable<ExcelAttribute>;
+                    var attrs = prop.GetCustomAttributes(typeof(ColumnAttribute), true) as IEnumerable<ColumnAttribute>;
                     var attr = attrs.FirstOrDefault(p => p.SheetName == "RAM");
                     if (attr != null)
                     {
                         var cell = ramSheet.GetRow(0).CreateCell(attr.ColIndex);
                         cell.SetCellValue(attr.ColumnName);
-
                         int index = 1;
                         foreach (var reg in ramRegs)
                         {
@@ -96,7 +96,7 @@ namespace ExcelManager
                 }
                 foreach (var prop in typeof(RomRegExecelRow).GetProperties())
                 {
-                    var attrs = prop.GetCustomAttributes(typeof(ExcelAttribute), true) as IEnumerable<ExcelAttribute>;
+                    var attrs = prop.GetCustomAttributes(typeof(ColumnAttribute), true) as IEnumerable<ColumnAttribute>;
                     var attr = attrs.FirstOrDefault(p => p.SheetName == "ROM");
                     if (attr != null)
                     {
@@ -138,6 +138,12 @@ namespace ExcelManager
                 workbook.Write(fs);
             }
         }
+
+        public void Export<T>(IEnumerable<T> obj, string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Export<T>(List<T> obj, string filePath)
         {
             var type = typeof(T);
@@ -145,8 +151,8 @@ namespace ExcelManager
             var execelDic = new Dictionary<string, List<object>>();
             foreach (var prop in props)
             {
-                var attrs = prop.GetCustomAttributes(true).Where(t => t.GetType() == typeof(ExcelAttribute)) as IEnumerable<ExcelAttribute>;
-                if (attrs.Count() > 0)
+                var attrs = prop.GetCustomAttributes(true).Where(t => t.GetType() == typeof(ColumnAttribute)) as IEnumerable<ColumnAttribute>;
+                if (attrs?.Count() > 0)
                 {
                     foreach (var attr in attrs)
                     {

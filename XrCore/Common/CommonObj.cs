@@ -23,7 +23,7 @@ namespace XrCore.Common
                 if (assemblies == null)
                 {
                     assemblies = new List<Assembly>();
-                    var dlls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "(*.dll|*.exe)");
+                    var dlls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll");
                     foreach (var dll in dlls)
                     {
                         try

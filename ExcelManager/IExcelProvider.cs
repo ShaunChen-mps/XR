@@ -9,6 +9,6 @@ namespace ExcelManager
     public interface IExcelProvider
     {
         void Load<T>(string filePath);
-        void Export<T>(List<T> obj, string filePath);
+        void Export<T>(IEnumerable<T> obj, string filePath);
     }
 }
