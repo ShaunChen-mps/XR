@@ -55,12 +55,12 @@ namespace XrConsole
         {
             var ss = IocManager.Instance;
             var regs = new List<Register>();
-            regs.Add(new Register(true, "testReg1", "0x01", 2, 2, 1, 1, new int[6] { 1, 2, 3, 4, 5, 6 }));//ROM MAPTOROM 0X01
-            regs.Add(new Register(true, "testReg2", "0x02", 2, 2, 1, 1, new int[6] { 21, 22, 23, 24, 25, 26 }));
-            regs.Add(new Register(false, "testReg1", "0x01", 2, 2, 1, 1, null));//RAM 0X01
-            regs.Add(new Register(false, "testReg2", "0x02", 2, 2, 1, 1, null));
+            regs.Add(new Register(true, "testReg1", "0x01", 2, 2, 1, 1, new int[6] { 41, 42, 43, 44, 45, 46 }));//ROM MAPTOROM 0X01
+            regs.Add(new Register(true, "testReg2", "0x02", 2, 2, 1, 1, new int[6] { 1, 2, 3, 24, 25, 26 }));
+            regs.Add(new Register(false, "testReg3", "0x03", 2, 2, 1, 1, new int[6] { 1, 32, 33, 34, 35, 36 }));//RAM 0X01
+            regs.Add(new Register(false, "testReg4", "0x04", 2, 2, 1, 1, new int[6] { 1, 32, 33, 34, 35, 36 }));
             var excelParser = new ExcelParser();
-            excelParser.Export(regs, "test.xlsx");
+            excelParser.Load(regs, "test.xlsx");
             var a = 16;
             Console.WriteLine(a.ToString("X2"));
 

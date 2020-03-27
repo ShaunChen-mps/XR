@@ -131,35 +131,66 @@ namespace ExcelManager
                 if (workbook == null) throw new Exception($"Selected filepath is not exist : {filePath}");
 
                 var props = typeof(T).GetProperties();
-                var filterProps = new List<PropertyInfo>();
-                var valueProps = new List<PropertyInfo>();
-                foreach (var prop in props)
-                {
-                    var attrs = prop.GetCustomAttributes<ColumnAttribute>();
-                    if (attrs.Count(p => p.Loader == Loader.Filter) > 0)
-                    {
-                        filterProps.Add(prop);
-                    }
-                    else if (attrs.Count(p => p.Loader == Loader.Value) > 0)
-                    {
-                        valueProps.Add(prop);
-                    }
-                }
-
                 for (int i = 0; i < workbook.NumberOfSheets; i++)
                 {
                     var sheet = workbook.GetSheetAt(i);
                     if (sheet != null)
                     {
-                        var headerDic = new Dictionary<string, int>();
-                        var firstRow = sheet.GetRow(0);
-                        for (int j = firstRow.FirstCellNum; j < firstRow.LastCellNum; j++)
+                        var filterProps = props.SelectMany(p => p.GetCustomAttributes<ColumnAttribute>().Where(t => t.SheetName == sheet.SheetName && t.Loader == Loader.Filter).Select(t => new { prop = p, attr = t }));
+                        var valueProps = props.SelectMany(p => p.GetCustomAttributes<ColumnAttribute>().Where(t => t.SheetName == sheet.SheetName && t.Loader == Loader.Value).Select(t => new { prop = p, attr = t }));
+                        for (int j = 1; j <= sheet.LastRowNum; j++)
                         {
-                            headerDic.Add(firstRow.GetCell(j).ToString(), j);
+                            var row = sheet.GetRow(j);
+                            if (row != null)
+                            {
+                                IEnumerable<T> fObjs = null;
+                                foreach (var fp in filterProps)
+                                {
+                                    var excelVal = row.GetCell(fp.attr.ColIndex).ToString();
+                                    fObjs = objs.Where(p => fp.prop.GetValue(p).Equals(excelVal));
+                                }
+                                foreach (var vp in valueProps)
+                                {
+                                    if (vp.attr.ArrayLength > 0)
+                                    {
+                                        int[] values = new int[vp.attr.ArrayLength];
+                                        for (int z = 0; z < vp.attr.ArrayLength; z++)
+                                        {
+                                            var excelVal = row.GetCell(vp.attr.ColIndex + z).ToString();
+                                            if (vp.attr.PropType == PropType.IntToHex)
+                                            {
+                                                values[z] = Convert.ToInt32(excelVal, 16);
+                                            }
+                                            else
+                                            {
+                                                values[z] = Convert.ToInt32(excelVal);
+                                            }
+                                        }
+                                        foreach (var fObj in fObjs)
+                                        {
+                                            vp.prop.SetValue(fObj, values);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var excelVal = row.GetCell(vp.attr.ColIndex);
+                                        foreach (var fObj in fObjs)
+                                        {
+                                            if (vp.attr.PropType == PropType.IntToHex)
+                                            {
+                                                vp.prop.SetValue(fObj, Convert.ToInt32(excelVal.ToString(), 16));
+                                            }
+                                            else
+                                            {
+                                                vp.prop.SetValue(fObj, excelVal);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-
             }
         }
     }

@@ -30,8 +30,6 @@ namespace ExcelManager
         }
     }
 
-    [SheetName("ROM", "p=>p.IsRom==true")]
-    [SheetName("RAM", "p=>p.IsRom==false")]
     [Serializable]
     public class Register
     {
