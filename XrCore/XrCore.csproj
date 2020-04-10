@@ -64,11 +64,10 @@
     <Compile Include="Pattern\Command\CraneDispatch.cs" />
     <Compile Include="Pattern\Command\Dispatcher.cs" />
     <Compile Include="Pattern\Command\IDispatch.cs" />
-    <Compile Include="Pattern\Decorator\CarTask.cs" />
-    <Compile Include="Pattern\Decorator\CraneTask.cs" />
-    <Compile Include="Pattern\Decorator\ITask.cs" />
-    <Compile Include="Pattern\Decorator\TaskDecorator.cs" />
-    <Compile Include="Pattern\Decorator\外部系统TaskDecorator.cs" />
+    <Compile Include="Pattern\Decorator\Battercake.cs" />
+    <Compile Include="Pattern\Decorator\BattercakeDecorator.cs" />
+    <Compile Include="Pattern\Decorator\BattercakeWithEgg.cs" />
+    <Compile Include="Pattern\Decorator\IBattercake.cs" />
     <Compile Include="Pattern\Facade\AgvTask.cs" />
     <Compile Include="Pattern\Facade\CraneTask.cs" />
     <Compile Include="Pattern\Facade\ITask.cs" />

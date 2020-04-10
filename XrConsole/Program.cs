@@ -27,6 +27,8 @@ using NPOI.XSSF.UserModel;
 using ExcelManager;
 using System.Linq.Expressions;
 using StringToLambda;
+using System.Collections.ObjectModel;
+using XrCore.SingleBase.Pattern;
 
 namespace XrConsole
 {
@@ -47,12 +49,47 @@ namespace XrConsole
         b = 2,
         c = 4,
     }
+    public class CommModel
+    {
+        public List<Register> Registers;
+        public CommModel()
+        {
+            Registers = new List<Register>()
+            {
+                new Register(false,"","",1,1,1,1,new int[1])
+            };
+        }
+    }
+    public class CommViewModel
+    {
+        public CommModel Model { get; set; }
+        public CommViewModel()
+        {
+            Model = new CommModel();
+        }
+    }
+    public class MainViewModel : CommViewModel
+    {
+        public MainViewModel() : base()
+        {
+
+        }
+    }
+    public class StatusViewModel
+    {
+
+        public StatusViewModel(CommViewModel comm)
+        {
+
+        }
+    }
     class Program
     {
         static object value0 = "0";
         static int DeviceId = 2971;
         static void Main(string[] args)
         {
+            
             var ss = IocManager.Instance;
             var regs = new List<Register>();
             regs.Add(new Register(true, "testReg1", "0x01", 2, 2, 1, 1, new int[6] { 41, 42, 43, 44, 45, 46 }));//ROM MAPTOROM 0X01

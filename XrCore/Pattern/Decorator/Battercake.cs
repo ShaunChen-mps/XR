@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace XrCore.Pattern.Decorator
 {
-    public class CraneTask : ITask
+    public class Battercake : IBattercake
     {
-        public int CreateTask(string from, string to)
+        public int Cost()
         {
-            return 0;
+            return 8;
+        }
+
+        public string GetDesc()
+        {
+            return "普通煎饼果子";
         }
     }
 }

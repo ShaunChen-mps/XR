@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace XrCore.Pattern.Decorator
 {
-    public class CarTask : ITask
+    public interface IBattercake
     {
-        public int CreateTask(string from, string to)
-        {
-            return 1;
-        }
+        string GetDesc();
+        int Cost();
     }
 }
